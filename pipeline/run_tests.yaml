@@ -1,0 +1,15 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: run-tests
+spec:
+  inputs:
+    resources:
+      - { type: git, name: source }
+  steps:
+    - name: tests
+      image: node:latest
+      command: ["/bin/bash", "-c"]
+      args:
+        - npm i && npm run test
+      workingDir: /workspace/source/src

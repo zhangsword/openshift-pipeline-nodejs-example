@@ -1,0 +1,12 @@
+
+apiVersion: tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: cicd-listener
+spec:
+  serviceAccountName: pipeline
+  triggers:
+  - binding:
+      name: cicd-pipelinebinding
+    template:
+      name: cicd-triggertemplate

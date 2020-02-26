@@ -15,6 +15,14 @@ spec:
       default: k8s
 
   tasks:
+    - name: run-tests
+      taskRef:
+        name: run-tests
+      resources:
+        inputs:
+          - name: source
+            resource: ui-repo
+
     - name: build-ui
       taskRef:
         name: buildah
@@ -29,6 +37,8 @@ spec:
       params:
         - name: TLSVERIFY
           value: "false"
+      runAfter:
+        - run-tests
 
     - name: apply-ui-manifests
       taskRef:
